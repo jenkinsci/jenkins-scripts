@@ -9,4 +9,4 @@
 } END META**/
 
 
-jenkins.model.Jenkins.items.each { it.logRotate() }
+jenkins.model.Jenkins.getItems().each { it.logRotate() }
