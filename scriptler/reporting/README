@@ -1,0 +1,3 @@
+This particular directory is for scripts that provide reporting facilities to the end user.
+
+listdisabledjobs.groovy - This script came about because there were many jobs that were disabled and interlaced between active jobs in the hundreds.  If you don't want to set up a new view that lists out just the disabled (or never run) jobs, this is a quick fix that will provide counts at the end of the run.

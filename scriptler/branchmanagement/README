@@ -1,0 +1,3 @@
+This particular directory is for scripts that allow the user to make changes in support of various branching policies they have in/within their company.
+
+clonebranches.groovy - This script was written to create NEW jobs based on a series of other jobs and append a version string to the name of the job.  For instance, if you have foo, bar, bat jobs AND they've all been branched to support 2.0 work, you can feed this script the name and the version you'd like to create the jobs for.  This will create the new jobs with the proper name and will make sure the Mercurial scm configuration is pointed at that new branch.

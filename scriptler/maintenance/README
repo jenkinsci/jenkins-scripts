@@ -1,0 +1,6 @@
+This particular directory is for scripts that help the user perform more maintenance related tasks.
+
+workspace-cleaner.groovy - This script will go through all workspaces for any/all jobs and remove them.
+
+warn-if-looped-triggers.groovy - This script will warn the user if any jobs have dependencies on other jobs and the trigger flow is a loop.
+
