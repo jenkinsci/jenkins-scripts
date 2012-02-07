@@ -1,3 +1,13 @@
+/*** BEGIN META {
+  "name" : "Clone Branches",
+  "comment" : "This script was written to create NEW jobs based on a series of other jobs and append a version string to the name of the job.  For instance, if you have foo, bar, bat jobs AND they've all been branched to support 2.0 work, you can feed this script the name and the version you'd like to create the jobs for.  This will create the new jobs with the proper name and will make sure the Mercurial scm configuration is pointed at that new branch.",
+  "parameters" : [],
+  "core": "1.300",
+  "authors" : [
+    { name : "EJ Ciramella" }
+  ]
+} END META**/
+
 import jenkins.model.*
 
 instance = jenkins.model.Jenkins.instance;

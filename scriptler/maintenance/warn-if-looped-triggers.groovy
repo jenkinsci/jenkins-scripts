@@ -1,3 +1,13 @@
+/*** BEGIN META {
+  "name" : "Warn if looped triggers",
+  "comment" : "This script will warn the user if any jobs have dependencies on other jobs and the trigger flow is a loop.",
+  "parameters" : [],
+  "core": "1.300",
+  "authors" : [
+    { name : "EJ Ciramella" }
+  ]
+} END META**/
+
 import hudson.model.*
 
 for(item in Hudson.instance.items) 

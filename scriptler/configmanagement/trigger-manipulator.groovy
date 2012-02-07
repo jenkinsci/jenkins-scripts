@@ -1,3 +1,12 @@
+/*** BEGIN META {
+  "name" : "Trigger Manipulator",
+  "comment" : "This script came about because there were many jobs that were both scheduled to run @midnight AND were polling the scm truth server.  Doing one or the other makes sense, but having polling AND @midnight doesn't.  This script will iterate over all the projects and pull out the timer based trigger as well as set the minute interval for how often it should poll.  Initially, I used this to move from a really slopply written polling interval string to */5 (run every 5 minutes).",
+  "parameters" : [],
+  "core": "1.300",
+  "authors" : [
+    { name : "EJ Ciramella" }
+  ]
+} END META**/
 import hudson.model.*
 import hudson.triggers.*
 
