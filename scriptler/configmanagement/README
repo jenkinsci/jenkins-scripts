@@ -1,6 +1,0 @@
-This particular directory is for scripts that allow the user to make bulk updates to the jobs they have in their Jenkins instance.
-
-trigger-manipulator.groovy - This script came about because there were many jobs that were both scheduled to run @midnight AND were polling the scm truth server.  Doing one or the other makes sense, but having polling AND @midnight doesn't.  This script will iterate over all the projects and pull out the timer based trigger as well as set the minute interval for how often it should poll.  Initially, I used this to move from a really slopply written polling interval string to */5 (run every 5 minutes).
-
-
-trigger-via-snapshot-deps.groovy - This script will make sure ALL of your maven jobs are triggered by builds on any snapshot dependencies.  There is a basic example of how to exclude jobs by name in the top of this script.
