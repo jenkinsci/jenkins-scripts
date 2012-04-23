@@ -1,9 +1,10 @@
 /*** BEGIN META {
   "name" : "Maven Multi-Module Project Batch Builds Remover",
-  "comment" : "Removes all the builds (modules included) of a given Maven Multi-module Project job ('jobName') and resets the number of the next build to 'newNextBuildNumber' (default 1). It's possible to conduct a dry run test using a parameter (default false) you could never guess ;)",
+  "comment" : "Removes all the builds (modules included) of a given Maven Multi-module Project job ('jobName') and resets the number of the next build to 'newNextBuildNumber' (default 1). It's possible to conduct a dry run test using a parameter (default true) you could never guess ;)",
   "parameters" : [ 'jobName', 'newNextBuildNumber', 'dryRun' ],
-  "core": "Please someone tell me how to determine the lowest version of Jenkins core for which this script works",
-  "authors" : [ { name : "Giacomo Boccardo" } ]
+  "authors" : [
+    { name : "Giacomo Boccardo" }
+  ]
 } END META**/
 
 import hudson.model.*
@@ -11,9 +12,9 @@ import hudson.model.*
 // If you are not using Scriptler plugin, uncomment and change properly the following parameters.
 // def jobName = "XYZ"
 // def newNextBuildNumber = 1
-// def dryRun = false
+// def dryRun = true
   
-// Needed if parameters are from Scriptler interface
+
 def dryRunBool = dryRun.toBoolean()
 def newNBNInt = newNextBuildNumber.toInteger()
 
