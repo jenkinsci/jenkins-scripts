@@ -4,7 +4,7 @@
   "parameters" : [ 'dryRun', 'daysToKeep', 'numToKeep', 'artifactDaysToKeep', 'artifactNumToKeep'],
   "core": "1.350",
   "authors" : [
-    { name : "Mestachs", name : "Dominik Bartholdi" }
+    { name : "Mestachs" }, { name : "Dominik Bartholdi" }
   ]
 } END META**/
 
