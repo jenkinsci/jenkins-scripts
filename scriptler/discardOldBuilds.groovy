@@ -1,10 +1,10 @@
 /*** BEGIN META {
   "name" : "Disgard old builds",
   "comment" : "Changes the config of the builds to disgard old builds (only if no log rotation is configured).",
-  "parameters" : [ 'daysToKeep', 'numToKeep', 'artifactDaysToKeep', 'artifactNumToKeep'],
+  "parameters" : [ 'dryRun', 'daysToKeep', 'numToKeep', 'artifactDaysToKeep', 'artifactNumToKeep'],
   "core": "1.350",
   "authors" : [
-    { name : "Dominik Bartholdi" }
+    { name : "Mestachs", name : "Dominik Bartholdi" }
   ]
 } END META**/
 
