@@ -1,7 +1,7 @@
 /*** BEGIN META {
   "name" : "Check Disk Usage",
   "comment" : "put disk usage info and check used percentage.",
-  "parameters" : [ threshold ],
+  "parameters" : [ root, threshold ],
   "core": "1.300",
   "authors" : [
     { name : "ITO Hayato" }
@@ -13,6 +13,7 @@ println columns.join("\t")
 result = true;
 
 File.listRoots().each{
+  if (!"".equals(root) && !root.equals(it.getAbsolutePath())) continue
   percent = Math.ceil(it.getTotalSpace() - it.getFreeSpace()) * 100 / it.getTotalSpace()
   columns = []
   columns << it.getAbsolutePath()
