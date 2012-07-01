@@ -13,8 +13,8 @@ println columns.join("\t")
 result = true;
 
 File.listRoots().each{
-  if (!"".equals(root) && !root.equals(it.getAbsolutePath())) continue
-  percent = Math.ceil(it.getTotalSpace() - it.getFreeSpace()) * 100 / it.getTotalSpace()
+  if (!"".equals(root) && !root.equals(it.getAbsolutePath())) return
+  percent = Math.ceil((it.getTotalSpace() - it.getFreeSpace()) * 100 / it.getTotalSpace())
   columns = []
   columns << it.getAbsolutePath()
   columns << Math.ceil(it.getTotalSpace() /1024/1024)
