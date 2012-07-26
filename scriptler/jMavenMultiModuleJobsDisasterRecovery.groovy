@@ -25,12 +25,16 @@ def dryRunBool = dryRun.toBoolean()
   
   
 def jobs = Hudson.instance.items
-  
-// Disable all jobs to avoid dirty states
-println("[Disabling all the jobs]")
+
+
+// Disable all jobs to avoid dirty states,
+// but remember the jobs already disabled to avoid re-enabling them
+def disabledJobs = [:]
+println("[Disabling all the enabled jobs]")
 jobs.each{job ->
+   disabledJobs[job.name] = job.disabled
+   println(" * " + job.name + (job.disabled? " already": "") + " disabled") 
    dryRunBool ?: (job.disabled=true)
-   println(" * " + job.name + " disabled")  	
 }
 
   
@@ -54,10 +58,10 @@ jobs.each{job ->
      
 }
 
-println("\n[Re-enabling all the jobs]")
+println("\n[Re-enabling only the jobs previously enabled]")
 jobs.each{job ->
-   dryRunBool ?: (job.disabled=false)
-   println(" > " + job.name + " enabled")  
+   dryRunBool ?: (job.disabled=disabledJobs[job.name])
+   println(" > " + job.name + (job.disabled ? " still disabled" : " enabled"))  
 }
 
   
@@ -102,4 +106,3 @@ def cleanJobRange(job, fromBuildNum, toBuildNum, dryRunBool, tab) {
       println("Something very strange happened if you read this message. Job: " + job)
    } 
 }  
-
