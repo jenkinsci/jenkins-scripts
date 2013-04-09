@@ -64,7 +64,7 @@ if(authStrategy instanceof RoleBasedAuthorizationStrategy){
     */       
    def roles = authStrategy.getRoleMap(authStrategy.GLOBAL).grantedRoles*.key.name.sort() + authStrategy.getRoleMap(authStrategy.PROJECT).grantedRoles*.key.name.sort()
       
-   usersPermissionsMatrix["roles"] = roleNames
+   usersPermissionsMatrix["roles"] = roles
    
    /*
     * Algo:
