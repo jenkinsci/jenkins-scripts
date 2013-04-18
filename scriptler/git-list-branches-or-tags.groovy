@@ -23,14 +23,22 @@ def gitScm = 'hudson.plugins.git.GitSCM'
 def gitTimeout = 30000
 def gitScope = param('scope','--heads')             // Change to '--tags' or specify param value to list tags
 
+def project
 try {
 
     def jenkinsContext = new URI(Jenkins.instance.rootUrlFromRequest).path.replaceAll(/\//,'\\/')
-    def projectUrl = (Thread.currentThread().name =~ "${jenkinsContext}([\\S]*)build")[0][1]
-    def project = Jenkins.instance.getAllItems(AbstractProject).find { it.url == projectUrl }
-
+    def projectUrl = (Thread.currentThread().name =~ "${jenkinsContext}([\\S]*\\/)[a-z]++[\\/]?")[0][1]
+    project = Jenkins.instance.getAllItems(AbstractProject).find { it.url == projectUrl }
+    if (!project)
+        throw new ArrayIndexOutOfBoundsException()
     if (project.scm.class.name != gitScm)
         return ["Invalid SCM - Not using ${gitScm}"]
+
+} catch (Throwable t) {
+    return ["Could not parse project URL from thread name: ${Thread.currentThread().name}"]
+}
+
+try {
 
     def url = project.scm.userRemoteConfigs.first().url
     def proc = ['git', 'ls-remote', gitScope, url].execute(); proc.waitForOrKill(gitTimeout);
@@ -38,8 +46,6 @@ try {
         throw new IllegalStateException(proc.errorStream.text)
     proc.in.text.tokenize('\n').collectAll { (it =~ /refs\/[^\/]+\/(.*)/)[0][1] }.sort()
 
-} catch (IndexOutOfBoundsException t) {
-    return ["Could not determine project URL from thread name: ${Thread.currentThread().name}"]
 } catch (Throwable t) {
-    return ["An unknown exception occurred listing branches: ${t}"]
+    return ["Could not list branches for ${project.name}: ${t}"]
 }
