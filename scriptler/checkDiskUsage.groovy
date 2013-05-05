@@ -1,7 +1,7 @@
 /*** BEGIN META {
   "name" : "Check Disk Usage",
   "comment" : "put disk usage info and check used percentage.",
-  "parameters" : [ root, threshold ],
+  "parameters" : [ "root", "threshold" ],
   "core": "1.300",
   "authors" : [
     { name : "ITO Hayato" }

@@ -1,10 +1,6 @@
 /*** BEGIN META {
   "name" : "Export role-strategy permissions to CSV",
-  "comment" : "Export the permissions defined in the
-   <a href='https://wiki.jenkins-ci.org/display/JENKINS/Role+Strategy+Plugin'>role-strategy plugin</a> 
-   in a CSV format.
-   <br />Further information in the ticket
-    <a href='https://issues.jenkins-ci.org/browse/JENKINS-8075'>JENKINS-8075</a>",
+  "comment" : "Export the permissions defined in the <a href='https://wiki.jenkins-ci.org/display/JENKINS/Role+Strategy+Plugin'>role-strategy plugin</a> in a CSV format. <br />Further information in the ticket <a href='https://issues.jenkins-ci.org/browse/JENKINS-8075'>JENKINS-8075</a>",
   "parameters" : [],
   "core": "1.424.2",
   "authors" : [

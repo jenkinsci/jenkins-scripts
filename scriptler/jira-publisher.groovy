@@ -1,6 +1,6 @@
 /*** BEGIN META {
   "name" : "Jira issue update publisher",
-  "comment" : "Activate the <a href="https://wiki.jenkins-ci.org/display/JENKINS/JIRA+Plugin">Jira plugin</a> publisher",
+  "comment" : 'Activate the <a href="https://wiki.jenkins-ci.org/display/JENKINS/JIRA+Plugin">Jira plugin</a> publisher',
   "parameters" : ['dryRun','jobs','jobsPattern'],
   "core": "1.424",
   "authors" : [
