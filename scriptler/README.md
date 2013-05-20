@@ -16,3 +16,8 @@ describing it must be included in its file, like the below:
         { name : "Niels Harremoes" }
       ]
     } END META**/
+
+
+To validate the format of the META information, please run the provided script:
+
+	&> groovy testMetaFormat.groovy

@@ -5,8 +5,10 @@ This is a collection of utility scripts for use with
 server.
 
 They can cover a range of use cases - automating Jenkins management,
-end-user tools, etc. They're organized by function -
-[Scriptler](https://wiki.jenkins-ci.org/display/JENKINS/Scriptler+Plugin)
+end-user tools, etc. They're organized by function 
+
+- [Scriptler](https://wiki.jenkins-ci.org/display/JENKINS/Scriptler+Plugin)
 scripts, for use in the Jenkins Script Console, are in the "scriptler"
-directory, and other scripts are in the "managed-scripts" directory,
+directory 
+- and other scripts are in the "managed-scripts" directory,
 and then organized by scripting language.
