@@ -14,11 +14,12 @@ import net.sf.json.*
 
 def json = [];
 
-def dir = new File(".");
-
-def scriptlerDir = new File(dir, "scriptler")
+def scriptlerDir = new File(".")
 
 scriptlerDir.eachFileMatch(~/.+\.groovy/) { File f ->
+    if(f.name.equals('testMetaFormat.groovy')) {
+        return
+    }
     println "parsing $f"
     def m = (f.text =~ /(?ms)BEGIN META(.+?)END META/)
     if (m) {
