@@ -71,10 +71,15 @@ chosenJobs.each { job ->
                                    job.scm.excludedRegions, job.scm.excludedUsers, job.scm.excludedRevprop, 
                                    job.scm.excludedCommitMessages, job.scm.includedRegions,
                                    job.scm.ignoreDirPropChanges, job.scm.filterChangelog, job.scm.additionalCredentials)
-      if ("true".equals(applyChanges)){
-        // Only write values, when applyChanges is true
-        println "Saving $job.name"
-        job.scm = newscm;
+      if(newscm.getLocations().size() == newSvnPath.size())
+      {
+        if ("true".equals(applyChanges)){
+          // Only write values, when applyChanges is true
+          println "Saving $job.name"
+          job.scm = newscm
+        }
+      } else {
+        println "ERROR: SVN SubversionSCM didn't pick up the new path."
       }
       //Job is done
     }
