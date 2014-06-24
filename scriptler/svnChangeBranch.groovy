@@ -8,8 +8,15 @@
   ]
 } END META**/
 
+/*
+ * Based on http://scriptlerweb.appspot.com/script/show/48001
+ * 
+ * Currently largely untested, although it seems to work, check your results!
+ */
+
 import hudson.scm.*
 
+// Default to replacing the part after .../branches/ with the value of newBranch.
 if(null == oldBranch || "".equals(oldBranch)) {
   oldBranch = "/branches/([^/])*/"
   newBranch = "/branches/$newBranch/"
