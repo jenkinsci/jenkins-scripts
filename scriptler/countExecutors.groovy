@@ -7,6 +7,7 @@
     { name : "Andy Pemberton" }
   ]
 } END META**/
+import jenkins.model.Jenkins
 
 println("All Nodes - executor count:")
 println()
