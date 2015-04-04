@@ -9,13 +9,14 @@ describing it must be included in its file, like the below:
 
     /*** BEGIN META {
       "name" : "Clear build queue",
-      "comment" : "If you accidently trigger a lot of unneeded builds, it is useful to be able to <b>cancel</b> them all",
+      "comment" : "print some cool <b>stuff</b>",
       "parameters" : [],
       "core": "1.300",
       "authors" : [
         { name : "Niels Harremoes" }
       ]
     } END META**/
+    println("hello world")
 
 
 To validate the format of the META information, please run the provided script:
