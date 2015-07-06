@@ -25,10 +25,14 @@ scriptlerDir.eachFileMatch(~/.+\.groovy/) { File f ->
     if (m) {
         try {
             def metadata = JSONObject.fromObject(m[0][1]);
+            assert metadata.name != null : "name version must be set for: ${f.name}"
+            assert metadata.comment != null : "comment must be set for: ${f.name}"            
             metadata['script'] = f.name
             json << metadata
         } catch (Exception e) {
+        	println "metadata for [${f.name}] not correct json" 
             e.printStackTrace(System.err);
+        	throw e 
         }
     }
 }
