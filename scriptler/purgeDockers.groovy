@@ -11,7 +11,7 @@
 
 def env = System.getenv()
 
-if (env["DOCKER_HOST"] == null) {
+if (env["DOCKER_HOST"]) {
 	println("This script will not work without a properly set up docker environment. Please define the environment variable 'DOCKER_HOST'")
 	false
 } else {
