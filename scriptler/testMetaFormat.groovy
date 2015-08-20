@@ -34,7 +34,9 @@ scriptlerDir.eachFileMatch(~/.+\.groovy/) { File f ->
             e.printStackTrace(System.err);
         	throw e 
         }
-    }
+    } else { 
+      throw new RuntimeException("no metadata in [${f.name}] found")
+	}
 }
 
 //lib.DataWriter.write("org.jenkinsci.plugins.scriptler.CentralScriptJsonCatalog",JSONObject.fromObject([list:json]));
