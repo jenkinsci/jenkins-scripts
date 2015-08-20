@@ -1,6 +1,6 @@
 /*** BEGIN META {
-  "name" : "Disgard old builds",
-  "comment" : "Changes the config of the builds to disgard old builds (only if no log rotation is configured).",
+  "name" : "Discard old builds",
+  "comment" : "Changes the config of the builds to discard old builds (only if no log rotation is configured).",
   "parameters" : [ 'dryRun', 'daysToKeep', 'numToKeep', 'artifactDaysToKeep', 'artifactNumToKeep'],
   "core": "1.350",
   "authors" : [
