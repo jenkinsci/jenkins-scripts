@@ -1,3 +1,12 @@
+/*** BEGIN META {
+      "name" : "disable all jobs",
+      "comment" : "disables all jobs",
+      "parameters" : [],
+      "core": "1.300",
+      "authors" : [
+        { name : "Nicolas Mommaerts" }
+      ]
+    } END META**/
 import hudson.model.*
 
 
