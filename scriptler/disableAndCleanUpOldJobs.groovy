@@ -53,22 +53,27 @@ println("\n### DISABLE OLD JOBS ###\n")
 def disableJob(item) {
   if (item.class.canonicalName != 'com.cloudbees.hudson.plugins.folder.Folder') {
     // disable item
-    item.disabled=true
+    item.disabled=true;
     // save
-    item.save()
+    item.save();
   }
 }
 
 def pushLogRotate(item) {
   // perform log rotation
-  item.logRotate();  
+  item.logRotate();
 }
 
 def wipeOutWorkspace(item) {
   // check if build is not in building stage
   if(!item.isBuilding()) {
-    // wipe out the workspace
-    item.doDoWipeOutWorkspace()
+    try {
+      // wipe out the workspace
+      item.doDoWipeOutWorkspace();
+    }
+    catch (ex) {
+      println("Error: " + ex);
+    }
   }
 }
 
@@ -87,9 +92,9 @@ def wipeOutWorkspaceFromSlaves(item) {
       println("\t\tWipe out ${fp}...")
       try {
         fp.deleteRecursive();
-      } 
+      }
       catch (ex) {
-        println("Error: " + ex)
+        println("Error: " + ex);
       }
     }
   }
