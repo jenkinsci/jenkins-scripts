@@ -19,16 +19,22 @@ if (pattern.startsWith('/') && pattern.endsWith('/')) {
     search = 'contains'
 }
 
+def count = 0
+
 jobs.each { job ->
     if (job instanceof hudson.model.AbstractProject && (disabled.toBoolean() || !job.disabled)) {
         def match = job.configFile.file.find { it."$search"(pattern) } != null
         if (match || job.name."$search"(pattern)) {
             println "<a href=\"${job.absoluteUrl}configure\">${job.name}</a> matches"
+            ++count
+
             if (details.toBoolean()) {
                 job.configFile.file.findAll { it."$search"(pattern) }.each { println '    ' + it.trim() }
             }
         }
     }
 }
+
+println "<strong>${count} match(es) in total</strong>"
 
 null
