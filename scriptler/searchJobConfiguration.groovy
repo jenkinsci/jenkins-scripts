@@ -20,11 +20,13 @@ if (pattern.startsWith('/') && pattern.endsWith('/')) {
 }
 
 jobs.each { job ->
-    def match = job.configFile.file.find { it."$search"(pattern) } != null
-    if (match || job.name."$search"(pattern)) {
-        println "<a href=\"${job.absoluteUrl}configure\">${job.name}</a> matches"
-        if (details.toBoolean()) {
-            job.configFile.file.findAll { it."$search"(pattern) }.each { println '    ' + it.trim() }
+    if (job instanceof hudson.model.AbstractProject) {
+        def match = job.configFile.file.find { it."$search"(pattern) } != null
+        if (match || job.name."$search"(pattern)) {
+            println "<a href=\"${job.absoluteUrl}configure\">${job.name}</a> matches"
+            if (details.toBoolean()) {
+                job.configFile.file.findAll { it."$search"(pattern) }.each { println '    ' + it.trim() }
+            }
         }
     }
 }
