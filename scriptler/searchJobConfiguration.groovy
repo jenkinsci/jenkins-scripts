@@ -1,7 +1,7 @@
 /*** BEGIN META {
   "name" : "Search Job Configuration",
   "comment" : "Searches job names and configurations for a matching plain text for regexp pattern",
-  "parameters" : ['pattern', 'details'],
+  "parameters" : ['pattern', 'details', 'disabled'],
   "core": "1.300",
   "authors" : [
     { name : "Sebastian Schuberth" }
@@ -20,7 +20,7 @@ if (pattern.startsWith('/') && pattern.endsWith('/')) {
 }
 
 jobs.each { job ->
-    if (job instanceof hudson.model.AbstractProject) {
+    if (job instanceof hudson.model.AbstractProject && (disabled.toBoolean() || !job.disabled)) {
         def match = job.configFile.file.find { it."$search"(pattern) } != null
         if (match || job.name."$search"(pattern)) {
             println "<a href=\"${job.absoluteUrl}configure\">${job.name}</a> matches"
