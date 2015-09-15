@@ -1,7 +1,7 @@
 /*** BEGIN META {
   "name" : "Search Job Configuration",
   "comment" : "Searches job names and configurations for a matching plain text for regexp pattern",
-  "parameters" : ['pattern', 'show'],
+  "parameters" : ['pattern', 'details'],
   "core": "1.300",
   "authors" : [
     { name : "Sebastian Schuberth" }
@@ -23,7 +23,7 @@ jobs.each { job ->
     def match = job.configFile.file.find { it."$search"(pattern) } != null
     if (match || job.name."$search"(pattern)) {
         println "<a href=\"${job.absoluteUrl}configure\">${job.name}</a> matches"
-        if (show.toBoolean()) {
+        if (details.toBoolean()) {
             job.configFile.file.findAll { it."$search"(pattern) }.each { println '    ' + it.trim() }
         }
     }
