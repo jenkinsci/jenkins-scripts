@@ -17,7 +17,7 @@ def cleanUsers = { it.flatten().sort().unique() - "null"}
  * The matrix is composed by the match between the roles (columns) and the users (rows).
  * Basically, you can start with this data structure to generate an export in the format you want.
  */
- def export = {matrix, formatter -> formatter(matrix)
+ def export = {matrix, formatter -> formatter(matrix)}
  
  /**
   * The default CSV formatter
