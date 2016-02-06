@@ -19,15 +19,12 @@ plist.each {
   pstr = pstr + ' ' + pname + ' ' + it.getVersion() + "\n"  // + "<br>"
 }
 
-print pstr
+println pstr  // Console Output
 
 if ( "executable" in Thread.currentThread().getProperties() ) {
   print Thread.currentThread().getProperties()
   def manager_build = Thread.currentThread().executable ; assert manager_build  // non-Postbuild context
   manager_build.displayName =  "#" + manager_build.number + " had " + pcount + " plugins"
-} else
-{
-  print "(not setting displayName in non-executable)"
 }
 
 return
