@@ -4,7 +4,7 @@
   "parameters" : [],
   "core": "1.609",
   "authors" : [
-    { name : "Ben Walding", "kuisathaverat" }
+    { name : "Ben Walding (kuisathaverat)" }
   ]
 } END META**/
 
