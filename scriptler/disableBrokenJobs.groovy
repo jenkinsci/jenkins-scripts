@@ -4,7 +4,7 @@
  "parameters" : [ 'dryRun', 'jobName', 'numberOfDays' ],
  "core": "1.409",
  "authors" : [
- { name : "Gareth Bowles", "Benjamin Francisoud" }
+ { name : "Gareth Bowles"},{ name: "Benjamin Francisoud" }
  ]
  } END META**/
 
