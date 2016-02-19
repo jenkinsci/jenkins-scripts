@@ -5,3 +5,6 @@
 /.project
 /.classpath
 /.settings
+
+# Mac OSX
+.DS_Store
