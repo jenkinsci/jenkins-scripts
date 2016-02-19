@@ -8,32 +8,46 @@
   ]
 } END META**/
 
-def jobs = hudson.model.Hudson.instance.items
+count = 0
 
 if (pattern.startsWith('/') && pattern.endsWith('/')) {
-    println "Searching jobs for regexp ${pattern}..."
-    pattern = pattern.substring(1, pattern.length() - 1)
-    search = 'matches'
+  println "Searching jobs for regexp ${pattern}..."
+  pattern = pattern.substring(1, pattern.length() - 1)
+  search = 'matches'
 } else {
-    println "Searching jobs for string '${pattern}'..."
-    search = 'contains'
+  println "Searching jobs for string '${pattern}'..."
+  search = 'contains'
 }
 
-def count = 0
+def isFolder(item) {
+  item instanceof com.cloudbees.hudson.plugins.folder.Folder
+}
 
-jobs.each { job ->
-    if (job instanceof hudson.model.AbstractProject && (disabled.toBoolean() || !job.disabled)) {
-        def match = job.configFile.file.find { it."$search"(pattern) } != null
-        if (match || job.name."$search"(pattern)) {
-            println "<a href=\"${job.absoluteUrl}configure\">${job.name}</a> matches"
-            ++count
+def isJob(item) {
+  item instanceof hudson.model.FreeStyleProject || item instanceof hudson.matrix.MatrixProject || item instanceof com.tikal.jenkins.plugins.multijob.MultiJobProject
+}
 
-            if (details.toBoolean()) {
-                job.configFile.file.findAll { it."$search"(pattern) }.each { println '    ' + it.trim() }
-            }
+def processItem(item) {
+  if (isFolder(item)) {
+    item.items.each { processItem(it) }
+  } else if (isJob(item)) {
+    if (disabled.toBoolean() || !item.disabled) {
+      def match = item.configFile.file.find { it."$search"(pattern) } != null
+      if (match || item.name."$search"(pattern)) {
+        println "<a href=\"${item.absoluteUrl}configure\">${item.name}</a> matches"
+        ++count
+
+        if (details.toBoolean()) {
+          item.configFile.file.findAll { it."$search"(pattern) }.each { println '    ' + it.trim() }
         }
+      }
     }
+  } else {
+    println "NOTE: Skipping item '${item.name}' of '${item.getClass()}'."
+  }
 }
+
+hudson.model.Hudson.instance.items.each { processItem(it) }
 
 println "<strong>${count} match(es) in total</strong>"
 
