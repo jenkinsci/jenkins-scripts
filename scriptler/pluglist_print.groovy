@@ -29,6 +29,5 @@ if ( "executable" in Thread.currentThread().getProperties() ) {
     currentBuild.displayName = "#" + currentBuild.number + " had " + pcount + " plugins"
   }
 
-
 return
 
