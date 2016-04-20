@@ -7,13 +7,8 @@
  ]
  } END META**/
 
- import jenkins.model.*
- import java.util.Date
-
  jenkins = Jenkins.instance
 
- int count = 0
- Date now = new Date()
  Calendar after = Calendar.getInstance()
  Calendar before = Calendar.getInstance()
  //set(int year, int month, int date, int hourOfDay, int minute,int second)
