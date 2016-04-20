@@ -8,25 +8,20 @@
   ]
 } END META**/
 
-import jenkins.model.Jenkins
-import hudson.model.AbstractProject
 import com.cloudbees.hudson.plugins.folder.Folder
 import hudson.triggers.TimerTrigger
 
-Jenkins jenkins = Jenkins.instance
-
-findAllItems(jenkins.items)
+findAllItems(Jenkins.instance.items)
 
 def findAllItems(items){
-  for(item in items)
-  {
-    if (!(item instanceof Folder)) {
-      if(item instanceof AbstractProject && !item.disabled && item.getJDK()) {
-        println 'Job : ' + item.getName() + ' - Name : ' + item.getJDK().getName() + ' - Home : ' + item.getJDK().getHome()
-        println item.getJDK().getProperties()
-      }
-    } else {
-      findAllItems(((Folder) item).getItems())
+    items.each{
+        if (!(it instanceof Folder)) {
+            if(it instanceof AbstractProject && !it.disabled && it.getJDK()) {
+                println 'Job : ' + it.getName() + ' - Name : ' + it.getJDK().getName() + ' - Home : ' + it.getJDK().getHome()
+                println it.getJDK().getProperties()
+            }
+        } else {
+            findAllItems(((Folder) it).getItems())
+        }
     }
-  }
 }
