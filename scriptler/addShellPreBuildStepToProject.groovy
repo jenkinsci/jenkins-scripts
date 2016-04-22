@@ -23,7 +23,7 @@ Jenkins.instance.getAllItems(Job.class)
       if(it instanceof FreeStyleProject){
         builders.addAll(it.getBuildersList())
         it.getBuildersList().clear()
-        it.getBuildersList()addAll(builders)
+        it.getBuildersList().addAll(builders)
       } else if (it instanceof MavenModuleSet ){
         builders.addAll(it.getPrebuilders())
         it.getPrebuilders().clear()
