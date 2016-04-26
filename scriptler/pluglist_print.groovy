@@ -22,10 +22,12 @@ plist.each {
 println pstr  // Console Output
 
 if ( "executable" in Thread.currentThread().getProperties() ) {
-  print Thread.currentThread().getProperties()
+  // print Thread.currentThread().getProperties()
   def manager_build = Thread.currentThread().executable ; assert manager_build  // non-Postbuild context
   manager_build.displayName =  "#" + manager_build.number + " had " + pcount + " plugins"
-}
+  } else { // Pipeline Workflow DSL
+    currentBuild.displayName = "#" + currentBuild.number + " had " + pcount + " plugins"
+  }
 
 return
 
