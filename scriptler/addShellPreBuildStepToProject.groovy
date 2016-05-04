@@ -16,7 +16,7 @@ import hudson.maven.*
 def scriptFile = new File(filePath)
 
 if(!scriptFile.exists() && scriptFile.isDirectory()) { 
-  throw IOException("Check file name")
+  throw new IOException("Check file name")
 }
 String script = scriptFile.text
 
