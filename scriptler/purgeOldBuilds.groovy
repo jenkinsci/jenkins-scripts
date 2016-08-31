@@ -9,4 +9,5 @@
 } END META**/
 
 
-jenkins.model.Jenkins.instance.items.each { it.logRotate() }
+jenkins.model.Jenkins.instance.items.findAll
+{job -> job.isBuildable() && job.hasProperty('logRotator') && job.logRotator!=null}.each { it.logRotate() }
