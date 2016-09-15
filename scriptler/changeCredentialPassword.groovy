@@ -28,7 +28,7 @@ def changePassword = { username, new_password ->
         def result = credentials_store.updateCredentials(
             com.cloudbees.plugins.credentials.domains.Domain.global(), 
             c, 
-            new UsernamePasswordCredentialsImpl(c.scope, null, c.description, c.username, new_password)
+            new UsernamePasswordCredentialsImpl(c.scope, c.id, c.description, c.username, new_password)
             )
 
         if (result) {
