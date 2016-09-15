@@ -1,7 +1,7 @@
 /*** BEGIN META {
  "name" : "Plugin Dependencies Report",
  "comment" : "Get information about direct and recursive (JSON object) dependencies of/to a specific plugin.",
- "parameters" : [ pluginShortName ],
+ "parameters" : [ "pluginShortName" ],
  "core": "1.609",
  "authors" : [
  { name : "Allan Burdajewicz" }

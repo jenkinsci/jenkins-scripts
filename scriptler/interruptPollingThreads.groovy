@@ -1,7 +1,7 @@
 /*** BEGIN META {
  "name" : "Interrupt Polling Threads",
  "comment" : "Interrupt Polling Threads running for a certain amount of time. Script based on a comment in JENKINS-5413.",
- "parameters" : [ duration ],
+ "parameters" : [ "duration" ],
  "core": "1.609",
  "authors" : [
  { name : "Allan Burdajewicz" }
