@@ -36,7 +36,7 @@ invalidCredentials = credentials.minus(authorizedCredentials)
 invalidCredentials.each { credential -> println "[${credential.id}] ${credential.username} (${credential.description})" }
 
 // No SCM-Configuration possible for External Jobs!
-jobs = hudsonInstance.items.findAll{job -> (job.disabled == false && !(job instanceof hudson.model.ExternalJob) && (job.scm instanceof SubversionSCM)) }
+jobs = hudsonInstance.items.findAll{job -> (job.disabled == false && (job instanceof hudson.model.AbstractProject) && (job.scm instanceof SubversionSCM)) }
 
 println '\n---- matching jobs ---'
 jobs.each { job ->
