@@ -19,7 +19,7 @@ println "Dry mode: $dry. \n"
 TriggerDescriptor SCM_TRIGGER_DESCRIPTOR = Hudson.instance.getDescriptorOrDie(SCMTrigger.class)
 assert SCM_TRIGGER_DESCRIPTOR != null;
 
-items = Hudson.instance.items.findAll{job -> (!(job instanceof hudson.model.ExternalJob) && (job.scm instanceof SubversionSCM) && job.disabled == false) }
+items = Hudson.instance.items.findAll{job -> ((job instanceof hudson.model.AbstractProject) && (job.scm instanceof SubversionSCM) && job.disabled == false) }
 
 for(item in items) {
   def trigger = item.getTriggers().get(SCM_TRIGGER_DESCRIPTOR)
