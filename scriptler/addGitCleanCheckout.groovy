@@ -7,11 +7,11 @@
   ]
 } END META**/
 
-for (item in Hudson.instance.items) {
+for(item in Hudson.instance.items) {
     println item.getSCMs();
     for(scm in item.getSCMs())
     {
-        if(scm instanceof 	hudson.plugins.git.GitSCM)
+        if(scm instanceof hudson.plugins.git.GitSCM)
         {
             es = scm.getExtensions()
             if(hasCheckOutPlugin(es, b))
@@ -27,8 +27,8 @@ for (item in Hudson.instance.items) {
 }
 
 private java.lang.Boolean hasCheckOutPlugin(es, java.lang.Boolean b) {
-    for (s in es) {
-        if (s instanceof hudson.plugins.git.extensions.impl.CleanCheckout) {
+    for(s in es) {
+        if(s instanceof hudson.plugins.git.extensions.impl.CleanCheckout) {
             return true;
         }
     }
