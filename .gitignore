@@ -8,3 +8,6 @@
 
 # Mac OSX
 .DS_Store
+
+# IDEA IntelliJ
+.idea
