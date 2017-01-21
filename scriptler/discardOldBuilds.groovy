@@ -1,10 +1,10 @@
 /*** BEGIN META {
  "name" : "Discard old builds",
- "comment" : "Changes the config of the builds to discard old builds (only if no log rotation is configured).",
+ "comment" : "Changes the config of the builds to discard old builds (only if no log rotation is configured).  Recurses into Folders.",
  "parameters" : [ 'dryRun', 'daysToKeep', 'numToKeep', 'artifactDaysToKeep', 'artifactNumToKeep'],
  "core": "2.46.2",
  "authors" : [
- { name : "Mestachs" }, { name : "Dominik Bartholdi" }, { name: "Denys Digtiar" }
+ { name : "Mestachs" }, { name : "Dominik Bartholdi" }, { name: "Denys Digtiar" }, { name : "Sam Gleske" }
  ]
  } END META**/
 
@@ -20,7 +20,7 @@ import hudson.model.Job
 import jenkins.model.BuildDiscarderProperty
 import hudson.tasks.LogRotator
 
-Jenkins.instance.allItems(Job).each { job ->
+Jenkins.instance.getAllItems(Job).each { job ->
     if (job.isBuildable() && job.supportsLogRotator() && job.getProperty(BuildDiscarderProperty) == null) {
         println "Processing \"${job.fullDisplayName}\""
         if (!"true".equals(dryRun)) {
