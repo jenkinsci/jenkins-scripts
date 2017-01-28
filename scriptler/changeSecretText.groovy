@@ -4,7 +4,6 @@
     "parameters" : ['id', 'secret'],
     "core": "1.609",
     "authors" : [
-        { name : "Thomas LÉVEIL" },
         { name : "Hans Schulz" }
     ]
 } END META**/
