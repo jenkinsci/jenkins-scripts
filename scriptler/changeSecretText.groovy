@@ -15,11 +15,11 @@ import hudson.util.Secret
 import jenkins.model.Jenkins
 
 def changeSecret = { id, scope, newSecret ->
-    def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
+    List creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
             StringCredentials.class,
             Jenkins.instance)
 
-    def c = creds.findResult { it.id == id && (scope == null || scope == "" || it.scope == scope) ? it : null}
+    def c = creds.findResult { it.id == id && (scope == null || scope == "" || it.scope.name() == scope) ? it : null}
 
     if (c) {
         def credentials_store = Jenkins.instance.getExtensionList(
