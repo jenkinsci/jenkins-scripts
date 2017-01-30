@@ -1,7 +1,7 @@
 /*** BEGIN META {
     "name" : "Change secret text",
     "comment" : "Modify the secret text for an existing credential identified by the ID",
-    "parameters" : ['id', 'secret'],
+    "parameters" : ['id', 'scope', 'secret'],
     "core": "1.609",
     "authors" : [
         { name : "Hans Schulz" }
@@ -19,7 +19,8 @@ def changeSecret = { id, newSecret ->
             StringCredentials.class,
             Jenkins.instance)
 
-    def c = creds.findResult { it.id == id ? it : null }
+    def c = creds.findResult { it.id == id && (scope == null || scope == "" || it.scope == scope) ? it : null}
+
     if (c) {
         def credentials_store = Jenkins.instance.getExtensionList(
                 'com.cloudbees.plugins.credentials.SystemCredentialsProvider'
@@ -37,7 +38,7 @@ def changeSecret = { id, newSecret ->
             throw new RuntimeException("Failed to change secret for ${c.id}")
         }
     } else {
-        throw new RuntimeException("No existing credential with ID ${c.id}")
+        throw new RuntimeException("No existing credential with ID ${id}")
     }
 }
 
