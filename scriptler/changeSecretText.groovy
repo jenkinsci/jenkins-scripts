@@ -14,7 +14,7 @@ import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl
 import hudson.util.Secret
 import jenkins.model.Jenkins
 
-def changeSecret = { id, newSecret ->
+def changeSecret = { id, scope, newSecret ->
     def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
             StringCredentials.class,
             Jenkins.instance)
@@ -42,4 +42,4 @@ def changeSecret = { id, newSecret ->
     }
 }
 
-changeSecret("${id}", "${secret}")
+changeSecret("${id}", "${scope}", "${secret}")
