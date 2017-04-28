@@ -1,6 +1,6 @@
 /*** BEGIN META {
  "name" : "Check Nodes Version",
- "comment" : "Check the .jar version of the Nodes against the Master version",
+ "comment" : "Check the .jar version and the java version of the Nodes against the Master versions",
  "parameters" : [ ],
  "core": "1.609",
  "authors" : [
@@ -12,19 +12,32 @@ import hudson.remoting.Launcher
 import hudson.slaves.SlaveComputer
 import jenkins.model.Jenkins
 
-def expectedVersion = Launcher.VERSION
-println "Expected Version = ${expectedVersion}"
+def expectedAgentVersion = Launcher.VERSION
+def expectedJavaVersion = System.getProperty("java.version")
+println "Master"
+println " Expected Agent Version = '${expectedAgentVersion}'"
+println " Expected Java Version = '${expectedJavaVersion}'"
 Jenkins.instance.getComputers()
         .findAll { it instanceof SlaveComputer }
         .each { computer ->
+    println "Node '${computer.name}'"
     if (!computer.getChannel()) {
-        println "Node ${computer.name} disconnected.."
+        println " is disconnected."
     } else {
-        def version = computer.getSlaveVersion()
-        if (!expectedVersion.equals(version)) {
-            println "${computer.name} - expected ${expectedVersion} but got ${version}"
-        } else {
-            println "${computer.name} - OK"
+        def isOk = true
+        def agentVersion = computer.getSlaveVersion()
+        if (!expectedAgentVersion.equals(agentVersion)) {
+            println " expected agent version '${expectedAgentVersion}' but got '${agentVersion}'"
+            isOk = false
+        }
+        def javaVersion = computer.getSystemProperties().get("java.version")
+        if (!expectedJavaVersion.equals(javaVersion)) {
+            println " expected java version '${expectedJavaVersion}' but got '${javaVersion}'"
+            isOk = false
+        }
+
+        if(isOk) {
+            println " OK"
         }
     }
 }
