@@ -8,15 +8,14 @@ Jenkins.instance.getAllItems(AbstractProject.class)
 .each { project -> 
   scm = project.scm
   
-  scm.extensions
-  .findAll {it instanceof CloneOption}
-  .findAll {! it.shallow}
-  .each {
-    boolean shallowClone = true
-    CloneOption cloneOption = new CloneOption(shallowClone, it.noTags, it.reference, it.timeout)
-    scm.extensions.remove(it)
-    scm.extensions.add(cloneOption) 
+  cloneOption = scm.extensions.find {it instanceof CloneOption}
+  if (!cloneOption) {
+      scm.extensions.add(new CloneOption(true, false, "", 10))
+  } else {
+      scm.extensions.remove(cloneOption)
+      scm.extensions.add(new CloneOption(true, cloneOption.noTags, cloneOption.reference, cloneOption.timeout))
   }
+
   project.save()
 }
 null
