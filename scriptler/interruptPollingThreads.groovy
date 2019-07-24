@@ -14,17 +14,17 @@ import jenkins.model.Jenkins
  * Interrupt any running Polling Threads that are currently running for more than `duration` seconds. This can be tuned.
  */
 Jenkins.instance.getTrigger("SCMTrigger").getRunners().each() {
-    item ->
-        println(item.getTarget().name)
-        println(item.getDuration())
-        println(item.getStartTime())
-        long millis = Calendar.instance.time.time - item.getStartTime()
+    runner ->
+        println(runner.getTarget().asItem().name)
+        println(runner.getDuration())
+        println(runner.getStartTime())
+        long millis = Calendar.instance.time.time - runner.getStartTime()
 
         if (millis > (1000 * Integer.parseInt(duration))) {
             Thread.getAllStackTraces().keySet().each() {
                 tItem ->
-                    if (tItem.getName().contains("SCM polling") && tItem.getName().contains(item.getTarget().name)) {
-                        println "Interrupting thread " + tItem.getId() + " " + tItem.getName();
+                    if (tItem.getName().contains("SCM polling") && tItem.getName().contains(runner.getTarget().asItem().name)) {
+                        println "Interrupting thread " + tItem.getId() + " " + tItem.getName()
                         tItem.interrupt()
                     }
             }
