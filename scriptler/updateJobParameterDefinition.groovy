@@ -1,7 +1,7 @@
 /*** BEGIN META {
  "name" : "Update Job Parameters",
  "comment" : "Update the definition of Job Parameters (update or override existing)",
- "parameters" : [ jobName , paramName , paramDefaultValue],
+ "parameters" : [ "jobName" , "paramName" , "paramDefaultValue"],
  "core": "1.609",
  "authors" : [
  { name : "Allan Burdajewicz" }
