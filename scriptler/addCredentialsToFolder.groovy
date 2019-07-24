@@ -22,8 +22,10 @@ Jenkins.instance.getAllItems(Folder.class)
     .each{
         AbstractFolder<?> folderAbs = AbstractFolder.class.cast(it)
         FolderCredentialsProperty property = folderAbs.getProperties().get(FolderCredentialsProperty.class)
-        if(property != null){
-            property.getStore().addCredentials(Domain.global(), c)
-            println property.getCredentials().toString()
+        if (property == null) {
+            property = new FolderCredentialsProperty()
+            folderAbs.addProperty(property)
         }
+        property.getStore().addCredentials(Domain.global(), c)
+        println property.getCredentials().toString()
     }
