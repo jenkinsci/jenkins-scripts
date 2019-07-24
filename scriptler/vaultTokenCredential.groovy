@@ -1,7 +1,7 @@
 /*** BEGIN META {
   "name" : "Update a VaultTokenCredential of hashicorp-vault-plugin",
   "comment" : "Update the Token for a specific credential ID for a VaultTokenCredential of https://plugins.jenkins.io/hashicorp-vault-plugin",
-  "parameters" : [vaultCredentialID, newTokenValue],
+  "parameters" : ["vaultCredentialID", "newTokenValue"],
   "core": "2.107.3",
   "authors" : [
     { name : "Ray Kivisto" }

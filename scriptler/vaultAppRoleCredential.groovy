@@ -1,7 +1,7 @@
 /*** BEGIN META {
   "name" : "Update VaultAppRoleCredential of hashicorp-vault-plugin",
   "comment" : "Update the Secret ID for a specific Role ID for a VaultAppRoleCredential of https://plugins.jenkins.io/hashicorp-vault-plugin",
-  "parameters" : [vaultRoleID, newSecret],
+  "parameters" : ["vaultRoleID", "newSecret"],
   "core": "2.107.3",
   "authors" : [
     { name : "Ray Kivisto" }
