@@ -5,7 +5,8 @@
   "core": "1.300",
   "authors" : [
     { name : "Stefan Heintz" },
-    { name : "Nico Mommaerts" }
+    { name : "Nico Mommaerts" },
+    { name : "Rob Fagen" }
   ]
 } END META**/
 import jenkins.model.Jenkins;
@@ -22,12 +23,35 @@ for (slave in Jenkins.instance.slaves) {
  slave_label_map.put(slave.name, labelListForSlave)
 }
 uniqueLabels.unique()
-   
+
+maxLen=0
+uniqueLabels.each() {
+  if (it.length() > maxLen) {
+    maxLen=it.length()
+  } 
+}
+
+def vertLabels = []
+
+for (int idx=0;idx<maxLen;idx++) {
+  def vertLabel="|"
+  uniqueLabels.each() {
+    if (idx < it.length()) { 
+      vertLabel+="${it[idx]}|" 
+    } else {
+      vertLabel+=" |"
+    }
+  }
+  vertLabels.add(vertLabel)
+}
+    
+
 def FIXED_FIRST_COLUMN = 40
  
-printSign(FIXED_FIRST_COLUMN-1, " ")
-print "|"
-uniqueLabels.each() { print "${it}|" }
+vertLabels.each() { 
+  printSign(FIXED_FIRST_COLUMN-1, " ")
+  print "${it}\n" 
+}
 printLine()
  
 for ( entry in slave_label_map ) {
@@ -46,7 +70,6 @@ for ( entry in slave_label_map ) {
   } else {
    print " "
   }
-  printSign(lab.size()-1, " ")
   print "|"
  }
  printLine()
