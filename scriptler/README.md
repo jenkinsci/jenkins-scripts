@@ -8,12 +8,12 @@ In order for a script to be included in the catalog, metadata
 describing it must be included in its file, like the below:
 
     /*** BEGIN META {
-      "name" : "Clear build queue",
+      "name" : "Hello World example",
       "comment" : "print some cool <b>stuff</b>",
       "parameters" : [],
       "core": "1.300",
       "authors" : [
-        { name : "Niels Harremoes" }
+        { name : "Joe Bloggs" }
       ]
     } END META**/
     println("hello world")
