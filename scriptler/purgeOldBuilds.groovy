@@ -4,10 +4,13 @@
   "parameters" : [],
   "core": "1.409",
   "authors" : [
-    { name : "Andrew Bayer" }
+    { name : "Andrew Bayer" }, { name : "Sam Gleske" }
   ]
 } END META**/
 
+import hudson.model.Job
+import jenkins.model.Jenkins
 
-jenkins.model.Jenkins.instance.items.findAll
-{job -> job.isBuildable() && job.hasProperty('logRotator') && job.logRotator!=null}.each { it.logRotate() }
+Jenkins.instance.getAllItems(Job.class).findAll { it.hasProperty('logRotator') && it.logRotator != null }.each { job ->
+    job.logRotate()
+}
