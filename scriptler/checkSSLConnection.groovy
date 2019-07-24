@@ -1,7 +1,7 @@
 /*** BEGIN META {
  "name" : "Check SSL handshake with Server",
  "comment" : "Check Jenkins can reach out to a Server via SSL. The script also reports all trusted certificates",
- "parameters" : [serverUrl],
+ "parameters" : ["serverUrl"],
  "core": "1.609",
  "authors" : [
  { name : "Allan Burdajewicz" }
