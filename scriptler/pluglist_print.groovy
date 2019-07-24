@@ -26,7 +26,8 @@ if ( "executable" in Thread.currentThread().getProperties() ) {
   def manager_build = Thread.currentThread().executable ; assert manager_build  // non-Postbuild context
   manager_build.displayName =  "#" + manager_build.number + " had " + pcount + " plugins"
   } else { // Pipeline Workflow DSL
-    currentBuild.displayName = "#" + currentBuild.number + " had " + pcount + " plugins"
+    // currentBuild.displayName = "#" + currentBuild.number + " had " + pcount + " plugins"
+    def skipForNow = "fixLater"
   }
 
 return
