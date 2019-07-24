@@ -10,6 +10,8 @@
 
 import com.cloudbees.hudson.plugins.folder.Folder
 import hudson.triggers.TimerTrigger
+import jenkins.model.Jenkins
+import hudson.model.AbstractProject
 
 findAllItems(Jenkins.instance.items)
 
