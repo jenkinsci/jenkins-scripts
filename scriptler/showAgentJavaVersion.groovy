@@ -8,7 +8,6 @@
   ]
 } END META**/
 
-import hudson.FilePath
 import hudson.model.Node
 import hudson.model.Slave
 import jenkins.model.Jenkins
