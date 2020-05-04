@@ -1,7 +1,7 @@
 /*** BEGIN META {
  "name" : "List EC2 Cloud instances",
  "comment" : "Iterate all EC2 Clouds and every template on them, to list the instances running",
- "parameters" : "",
+ "parameters" : [],
  "core": "2.32",
  "authors" : [{ name : "kuisathaverat" }]
  } END META**/
