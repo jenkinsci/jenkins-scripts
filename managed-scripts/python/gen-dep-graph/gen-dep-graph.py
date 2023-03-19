@@ -43,7 +43,7 @@ if os.path.exists(file_name):
         IGNORED = map((lambda foo: foo.strip()), IGNORED.split(","))
     except ConfigParser.NoOptionError:
         pass
-
+sleep 2
 print "Using url %s" % (JENKINS_URL)
 print "Ignoring %d job(s)" % (len(IGNORED))
 
@@ -74,7 +74,7 @@ for job in obj['jobs']:
     for proj in job_obj['downstreamProjects']:
         proj['name'] = proj['name'].replace("-", "_")
         result.append('"%s" -> "%s"' % (job['name'], proj['name']))
-
+sleep 2
 print "Writing output.dot for Graphviz"
 f = open("output.dot", "w")
 f.write("digraph G {\n")
@@ -83,7 +83,7 @@ for line in result:
     f.write("\n")
 f.write("}")
 f.close()
-
+sleep 2
 print "Generating output.svg with Graphviz"
 path = os.path.join(os.path.abspath("."), "output.svg")
 result = check_call(shlex.split("dot -Tsvg output.dot -o%s" % (path),posix=(os.name == 'posix')))
