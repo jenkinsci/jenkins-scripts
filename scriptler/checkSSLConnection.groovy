@@ -8,17 +8,16 @@
  ]
  } END META**/
 
-import javax.net.ssl.HttpsURLConnection
+import hudson.ProxyConfiguration
 import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
+import java.net.http.HttpResponse
 import java.security.KeyStore
-import java.security.Principal
 import java.security.cert.Certificate
 import java.security.cert.X509Certificate
 
 try {
-
     println("## DUMP JVM TRUST MANAGERS ##")
     TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
     tmf.init((KeyStore) null)
@@ -28,7 +27,7 @@ try {
         if (trustManager instanceof X509TrustManager) {
             X509TrustManager x509TrustManager = (X509TrustManager) trustManager
             for (X509Certificate certificate: x509TrustManager.getAcceptedIssuers()) {
-                println("\t" + certificate.getSubjectDN())
+                println("\t" + certificate.getSubjectX500Principal())
             }
             println("\tAccepted issuers count : " + x509TrustManager.getAcceptedIssuers().length)
             println("###################")
@@ -42,12 +41,15 @@ try {
 }
 try {
     String url = "${serverUrl}"
-    HttpsURLConnection urlConnection = (HttpsURLConnection) new URL(url).openConnection()
-    println(url + "->" + urlConnection.getResponseCode() + " " + urlConnection.getResponseMessage())
-    for (Certificate certificate : urlConnection.getServerCertificates()) {
+    def response = ProxyConfiguration.newHttpClient().send(
+            ProxyConfiguration.newHttpRequestBuilder(new URI(url)).build(),
+            HttpResponse.BodyHandlers.discarding()
+    )
+    println("$url -> ${response.statusCode()}")
+    for (Certificate certificate : response.sslSession().get().getPeerCertificates()) {
         if (certificate instanceof X509Certificate) {
             X509Certificate x509Certificate = (X509Certificate) certificate
-            Principal subjectDN = x509Certificate.getSubjectDN()
+            def subjectDN = x509Certificate.getSubjectX500Principal()
             println("\t" + subjectDN.getClass() + " - " + subjectDN)
         } else {
             println(certificate)
